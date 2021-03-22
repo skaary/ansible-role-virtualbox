@@ -1,0 +1,29 @@
+---
+- name: ensure virtualbox is installed
+  apt:
+    name: "{{ [ virtualbox_package_name ] + virtualbox_exclusive_packages + virtualbox_shared_packages }}"
+    state: present
+
+- name: set username
+  command: whoami
+  register: virtualbox_username
+  check_mode: false
+  changed_when: false
+
+- name: ensure user is added to vboxusers group
+  user:
+    name: "{{ virtualbox_username.stdout }}"
+    group: "vboxusers"
+    append: true
+    update_password: on_create
+  become: true
+
+##https://ratil.life/unattended-install-virtualbox-ext-pack/
+- name: set debconf selection for unattended virtualbox-ext-pack install
+  shell: "echo virtualbox-ext-pack virtualbox-ext-pack/license select true | debconf-set-selections"
+  changed_when: false
+
+- name: install virtualbox extension pack
+  apt:
+    name: virtualbox-ext-pack
+    state: present
