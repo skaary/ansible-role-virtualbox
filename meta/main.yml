@@ -1,0 +1,6 @@
+---
+dependencies: []
+
+galaxy_info:
+  role_name: virtualbox
+  description: VirtualBox for linux.
