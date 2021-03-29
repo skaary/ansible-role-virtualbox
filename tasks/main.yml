@@ -13,7 +13,7 @@
 - name: ensure user is added to vboxusers group
   user:
     name: "{{ virtualbox_username.stdout }}"
-    group: "vboxusers"
+    groups: vboxusers
     append: true
     update_password: on_create
   become: true
