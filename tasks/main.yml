@@ -3,6 +3,7 @@
   apt:
     name: "{{ [ virtualbox_package_name ] + virtualbox_exclusive_packages + virtualbox_shared_packages }}"
     state: present
+  become: true
 
 - name: set username
   command: whoami
@@ -22,8 +23,10 @@
 - name: set debconf selection for unattended virtualbox-ext-pack install
   shell: "echo virtualbox-ext-pack virtualbox-ext-pack/license select true | debconf-set-selections"
   changed_when: false
+  become: true
 
 - name: install virtualbox extension pack
   apt:
     name: virtualbox-ext-pack
     state: present
+  become: true
