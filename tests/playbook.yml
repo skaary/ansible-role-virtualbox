@@ -1,0 +1,5 @@
+---
+- name: Install Virtualbox
+  hosts: all
+  roles:
+    - virtualbox
