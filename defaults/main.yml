@@ -3,9 +3,16 @@ virtualbox_package_name: virtualbox
 
 virtualbox_exclusive_packages:
   - virtualbox-dkms
-  # - virtualbox-ext-pack
   - virtualbox-guest-additions-iso
-  - virtualbox-guest-dkms
+  - virtualbox-guest-dkms # not used in jammy anymore
+  - virtualbox-guest-utils
+  - virtualbox-guest-x11
+  - virtualbox-qt
+  - debconf-utils
+
+virtualbox_exclusive_packages_jammy:
+  - virtualbox-dkms
+  - virtualbox-guest-additions-iso
   - virtualbox-guest-utils
   - virtualbox-guest-x11
   - virtualbox-qt
@@ -15,5 +22,3 @@ virtualbox_ext_package: virtualbox-ext-pack
 
 virtualbox_shared_packages:
   - dkms
-  # - linux-headers-amd64
-  # - xmount

@@ -1,9 +1,24 @@
 ---
+- set_fact:
+    release: ""
+
+- set_fact:
+    release: "22"
+  when: (ansible_lsb['id'] == "Ubuntu" and ansible_lsb['major_release'] == "22") or (ansible_lsb['id'] == "Linuxmint" and ansible_lsb['major_release'] == "21")
+
 - name: ensure virtualbox is installed
   apt:
     name: "{{ [ virtualbox_package_name ] + virtualbox_exclusive_packages + virtualbox_shared_packages }}"
     state: present
   become: true
+  when: release != "22"
+
+- name: ensure virtualbox is installed
+  apt:
+    name: "{{ [ virtualbox_package_name ] + virtualbox_exclusive_packages_jammy + virtualbox_shared_packages }}"
+    state: present
+  become: true
+  when: release == "22"
 
 - name: set username
   command: whoami

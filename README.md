@@ -1,7 +1,7 @@
 # Ansible Role: VirtualBox 
 [![CI](https://github.com/skaary/ansible-role-virtualbox/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/skaary/ansible-role-virtualbox/actions?query=workflow%3Ci)
 
-An Ansible Role that installs [VirtualBox](https://www.virtualbox.org/) on Linux.
+An Ansible Role that installs [VirtualBox](https://www.virtualbox.org/) on Ubuntu and Linux Mint.
 
 ## Installation
 
@@ -35,7 +35,9 @@ Alternatively, install the role via a _requirements.yml_ file, e.g. when install
 Vagrant can be used to test the role in order to graphically see it working in a virtual machine. Make sure Vagrant and VirtualBox are installed:
 
 ```bash
-$ sudo apt install vagrant virtualbox
+wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt install vagrant
 ```
 
 Use the following commands to run vagrant and boot up the virtual machine:
